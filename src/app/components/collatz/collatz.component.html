@@ -1,0 +1,35 @@
+<form [formGroup]="form" class="mb-5">
+  <div class="input-group">
+    <input
+      type="number"
+      formControlName="value"
+      min="1"
+      step="1"
+      class="form-control form-control-lg"
+      placeholder="Type a number"
+      aria-label="Type a positive number"
+    />
+
+    <button
+      *ngFor="let item of options | keyvalue"
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="setOption(item.key)"
+      [ngClass]="{ active: option === item.key }"
+    >
+      {{ item.value }}
+    </button>
+  </div>
+</form>
+
+<ng-template [ngIf]="form.valid && option">
+  <app-detail *ngIf="option === 'detail'" [value]="form.value.value"></app-detail>
+  <app-explanation *ngIf="option === 'explanation'" [value]="form.value.value"></app-explanation>
+
+  <h4 *ngIf="option === 'sequence'">Collatz generated sequence: {{ sequence.join(', ') }}</h4>
+  <h4 *ngIf="option === 'nextNumber'">Collatz next number is {{ next }}</h4>
+</ng-template>
+
+<p *ngIf="form.invalid && form.dirty" class="text-danger">
+  Please enter a valid number. Must be greater or equal than 1
+</p>

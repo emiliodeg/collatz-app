@@ -1,0 +1,35 @@
+<h4 class="mb-3">Sequence generated: {{ detail.sequence.join(', ') }}</h4>
+
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th span="2">More details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Even count</td>
+      <td>{{ detail.even }}</td>
+    </tr>
+    <tr>
+      <td>Odds count</td>
+      <td>{{ detail.odds }}</td>
+    </tr>
+    <tr>
+      <td>Maximum value</td>
+      <td>{{ detail.max }}</td>
+    </tr>
+    <tr>
+      <td>Minimum value</td>
+      <td>{{ detail.min }}</td>
+    </tr>
+    <tr>
+      <td>Finished</td>
+      <td>{{ detail.finished | yesNo }}</td>
+    </tr>
+    <tr>
+      <td>Primes</td>
+      <td>{{ detail.primes.join(', ') }}</td>
+    </tr>
+  </tbody>
+</table>

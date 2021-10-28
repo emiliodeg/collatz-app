@@ -1,0 +1,14 @@
+<p>
+  For the given number <strong>{{ detail.sequence[0] }}</strong> the Collatz sequence is the following
+  <em>{{ detail.sequence.join(', ') }}</em
+  >. So we can say that it is <strong>{{ detail.finished ? 'a finished' : 'an unfinished' }} sequence.</strong>
+</p>
+
+<p>{{ detail.length }} values were found, of which {{ detail.odds }} are odd and {{ detail.even }} are even.</p>
+
+<p>
+  We can also add that from the generated sequence the maximum value reached was {{ detail.max }}, the lowest being
+  {{ detail.min }}.
+</p>
+
+<p>For lovers of prime numbers {{ detail.primes.join(', ') }} were found.</p>
