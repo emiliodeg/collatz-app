@@ -6,15 +6,13 @@ describe('YesNoPipe', () => {
     pipe = new YesNoPipe();
   });
 
-  it('create an instance', () => {
-    expect(pipe).toBeTruthy();
-  });
+  it('create an instance', () => expect(pipe).toBeTruthy());
 
   const falsy = [false, 0, '', null];
 
   falsy.forEach((test) => {
     it(`should get "no" with falsy values`, () => {
-      const result: string = pipe.transform(test);
+      const result = pipe.transform(test);
 
       expect(result).toEqual('no');
     });
@@ -24,7 +22,7 @@ describe('YesNoPipe', () => {
 
   truthy.forEach((test) => {
     it(`should get "yes" with truthy values`, () => {
-      const result: string = pipe.transform(test);
+      const result = pipe.transform(test);
 
       expect(result).toEqual('yes');
     });

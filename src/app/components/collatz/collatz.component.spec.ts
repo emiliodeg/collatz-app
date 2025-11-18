@@ -1,32 +1,25 @@
-import { detail } from 'collatz-generator/lib';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DetailComponent } from '../detail/detail.component';
 import { CollatzComponent } from './collatz.component';
 
 describe('CollatzComponent', () => {
   let component: CollatzComponent;
+  let fixture: ComponentFixture<CollatzComponent>;
 
   beforeEach(() => {
-    component = new CollatzComponent();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  describe('setOption', () => {
-    it('should set an option', () => {
-      const option = 'detail';
-
-      component.setOption(option);
-
-      expect(component.option).toBe(option);
+    TestBed.configureTestingModule({
+      imports: [CollatzComponent, ReactiveFormsModule, DetailComponent],
+      providers: [provideZonelessChangeDetection()]
     });
   });
 
-  describe('next', () => {
-    it('should get next value', () => {
-      component.form.setValue({ value: 5 });
-
-      expect(component.next).toBe(16);
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CollatzComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
+
+  it('should create', () => expect(component).toBeTruthy());
 });

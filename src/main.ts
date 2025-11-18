@@ -9,9 +9,7 @@ if (environment.production) {
 }
 
 const config: ApplicationConfig = {
-  providers: [
-    provideZonelessChangeDetection()
-  ]
-}
+  providers: [provideZonelessChangeDetection()]
+};
 
 bootstrapApplication(AppComponent, config).catch(console.error);
