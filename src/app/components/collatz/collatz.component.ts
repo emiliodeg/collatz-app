@@ -1,41 +1,38 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { sequence, generate } from 'collatz-generator/lib';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DetailComponent } from '../detail/detail.component';
 
-export type resultType = 'nextNumber' | 'sequence' | 'detail' | 'explanation';
+interface IForm {
+  value: FormControl<number>;
+}
 
 @Component({
   selector: 'app-collatz',
-  templateUrl: './collatz.component.html',
-  styleUrls: ['./collatz.component.scss']
+  template: `<form [formGroup]="form" class="mb-5">
+      <div class="input-group">
+        <input
+          type="number"
+          [formControl]="form.controls.value"
+          min="1"
+          step="1"
+          class="form-control form-control-lg"
+          placeholder="Type a number"
+          aria-label="Type a positive number"
+        />
+      </div>
+    </form>
+
+    @if (form.valid) {
+      <app-detail [value]="form.getRawValue().value" />
+    }
+
+    @if (form.invalid && form.dirty) {
+      <p class="text-danger">Please enter a valid number. Must be greater or equal than 1</p>
+    }`,
+  imports: [ReactiveFormsModule, DetailComponent]
 })
 export class CollatzComponent {
-  form: FormGroup = new FormGroup({
-    value: new FormControl(null, [Validators.required, Validators.min(1)])
+  protected readonly form = new FormGroup<IForm>({
+    value: new FormControl(1, { validators: [Validators.required, Validators.min(1)], nonNullable: true })
   });
-  options: { [key in resultType]: string } = {
-    nextNumber: 'Next number',
-    sequence: 'Sequence',
-    detail: 'Detail',
-    explanation: 'Text'
-  };
-  option: resultType;
-
-  setOption(option: resultType): void {
-    this.option = option;
-  }
-
-  get value(): number {
-    return this.form.value.value;
-  }
-
-  get sequence(): number[] {
-    return sequence(this.value);
-  }
-
-  get next(): number {
-    const generator = generate(this.value);
-
-    return generator.next().value;
-  }
 }

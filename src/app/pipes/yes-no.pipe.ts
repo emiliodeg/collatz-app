@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'yesNo'
 })
 export class YesNoPipe implements PipeTransform {
-  transform(value: any): string {
+  transform(value: unknown): string {
     return value ? 'yes' : 'no';
   }
 }
