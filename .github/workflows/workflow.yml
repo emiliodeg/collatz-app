@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [22.x]
 
     steps:
       - name: Checkout
@@ -28,4 +28,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: ./dist/collatz-app
+          folder: ./dist/collatz-app/browser
